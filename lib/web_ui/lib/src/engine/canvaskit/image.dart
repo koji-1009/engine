@@ -31,7 +31,9 @@ Future<ui.Codec> skiaInstantiateImageCodec(Uint8List list,
           targetWidth: targetWidth, targetHeight: targetHeight);
     } else {
       final DomBlob blob = createDomBlob(<ByteBuffer>[list.buffer]);
-      codec = await decodeBlobToCkImage(blob);
+      final JSString url = createObjectURL(blob.toJSAnyShallow);
+      codec = await decodeUrlToCkImage(url.toDart);
+      revokeObjectURL(url);
     }
   }
   return CkResizingCodec(

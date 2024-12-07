@@ -2354,6 +2354,14 @@ class DomURL {
 DomURL createDomURL(String url, [String? base]) =>
     base == null ? DomURL(url.toJS) : DomURL(url.toJS, base.toJS);
 
+@JS('URL.createObjectURL')
+@staticInterop
+external JSString createObjectURL(JSAny object);
+
+@JS('URL.revokeObjectURL')
+@staticInterop
+external void revokeObjectURL(JSString url);
+
 extension DomURLExtension on DomURL {
   @JS('createObjectURL')
   external JSString _createObjectURL(JSAny object);
